@@ -1,5 +1,9 @@
-/*Inicio: Reset CSS compatible con Bootstrap */
+/*Inicio: @Import */
+@import url("./node_modules/bootstrap/dist/css/bootstrap.min.css");
+@import url("./node_modules/bootstrap-icons/font/bootstrap-icons.min.css");
+/*Fin: @Import */
 
+/*Inicio: Reset CSS compatible con Bootstrap */
 *,
 *::before,
 *::after {
@@ -29,11 +33,10 @@ textarea,
 select {
     font: inherit;
 }
-
 /*Fin: Reset CSS compatible con Bootstrap */
 
-/*Inicio: Estilos generales */
 
+/*Inicio: variables globales */
 :root {
     --primaryColor: #dc0a2d;
     --secondaryColor: #30a7d7;
@@ -43,9 +46,89 @@ select {
     --bodyBgcolor: #0d0d0d;
     --selectSearchInputBg: #1f2020;
 }
+/*Fin: variables globales */
 
+/*Inicio: Estilos generales */
 body {
     font-family: "Space Mono", monospace;
+    background-color: var(--bodyBgcolor);
+}
+/*Fin: Estilos generales */
+
+/*Inicio: Sobrescritura de colores de Bootstrap */
+.bg-primary {
+    background-color: var(--primaryColor) !important;
+}
+/*Fin: Sobrescritura de colores de Bootstrap */
+
+
+/*Inicio: Estilos del logotipo */
+.logo-container span {
+    color: var(--textColor);
+    font-weight: bold;
+    margin-left: 5px;
+}
+/*Fin: Estilos del logotipo */
+
+
+/*Inicio: Estilos del buscador */
+.form-search-input-container .form-control {
+    background-color: var(--selectSearchInputBg);
+    border-color: transparent !important;
+    border-radius: 5px !important;
 }
 
-/*Fin: Estilos generales */
+.form-search-input-container .form-control::placeholder {
+    color: grey;
+}
+
+.form-search-input-container .form-control:active,
+.form-search-input-container .form-control:focus {
+    box-shadow: 0 0 0 .05rem rgba(255, 255, 255, .4);
+    border-color: transparent !important;
+}
+
+.form-search-input-container .input-group-text {
+    border-radius: 24px !important;
+    margin-right: 15px;
+    /* background-color: #dc0a2d; */
+    background-color: var(--primaryColor);
+    border-color: transparent !important;
+    padding: 10px;
+}
+
+.form-search-input-container .input-group-text i {
+    width: 24px;
+    height: 24px;
+    /* color: white; */
+    color: var(--textColor);
+}
+/*Fin: Estilos del buscador */
+
+
+/*Inicio: Estilos responsive del menú principal */
+@media (min-width: 992px) {
+
+    .navbar-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .main-menu {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    /* Buscaba cada li y aplicaba el color &rarr; menos agresivo la corrección */
+    /* .main-menu li * {
+        color: var(--textColor);
+    } */
+
+    .main-menu .nav-link {
+        color: var(--textColor);
+    }
+
+}
+/*Fin: Estilos responsive del menú principal */
