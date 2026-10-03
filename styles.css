@@ -1,0 +1,51 @@
+/*Inicio: Reset CSS compatible con Bootstrap */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/*Fin: Reset CSS compatible con Bootstrap */
+
+/*Inicio: Estilos generales */
+
+:root {
+    --primaryColor: #dc0a2d;
+    --secondaryColor: #30a7d7;
+    --tertiaryColor: #51AD60;
+    --neutral: #232323;
+    --textColor : white;
+    --bodyBgcolor: #0d0d0d;
+    --selectSearchInputBg: #1f2020;
+}
+
+body {
+    font-family: "Space Mono", monospace;
+}
+
+/*Fin: Estilos generales */
