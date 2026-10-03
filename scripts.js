@@ -6,26 +6,26 @@
 /*Inicio: Inicialización de la aplicación */
 
 window.addEventListener("load", function(){
-    
-    /*QuerySelectorAll devuelve TODOS los elementos que cumplan el selector*/
-    let inputName = document.querySelectorAll("#pokemon-name");
-
-    let loadBar = document.getElementById("Load-bar");
-
-    /*Retorna SOLO el primer elemento que cumpla con tener el id ya que un id debe ser UNICO en el DOM*/
-    let form1 = document.getElementById("form1");
-
+    const pokemonName = document.getElementById("pokemon-name");
+    const searchError = document.getElementById("search-error");
+    const form1 = document.getElementById("form1");
 
     form1.addEventListener("submit", async function($e){
         $e.preventDefault();
+        searchError.textContent = "";
+        pokemonName.textContent = "";
 
-        let formData = new FormData(this);
-        let pokemonNumber = formData.get("pokedex-number");
-        
-        let pokemonData = await pokeApi.getPokemonById(pokemonNumber);
+        const formData = new FormData(this);
+        const pokemonNumber = formData.get("pokedex-number");
 
-        inputName[0].value=pokemonData.name;
-    
+        try {
+            const pokemonData = await pokeApi.getPokemonById(pokemonNumber);
+            pokemonName.textContent = pokemonData.name;
+        } catch (error) {
+            searchError.textContent = error instanceof Error
+                ? error.message
+                : "No se pudo buscar el Pokémon.";
+        }
     });
 
 });

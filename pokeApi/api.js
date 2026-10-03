@@ -7,13 +7,17 @@ let getAllPokemons = async () => {
 }
 
 let getPokemonById = async (id) => {
-    /* return pokemon */
+    const response = await fetch("https://pokeapi.co/api/v2/pokemon/" + id);
 
-    let pokemonData = await fetch("https://pokeapi.co/api/v2/pokemon/" + id);
+    if (!response.ok) {
+        if (response.status === 404) {
+            throw new Error("No se encontró un Pokémon con ese número.");
+        }
 
-    pokemonData = await pokemonData.json();
+        throw new Error(`PokéAPI respondió con el estado ${response.status}.`);
+    }
 
-    return pokemonData;
+    return await response.json();
 }
 
 
