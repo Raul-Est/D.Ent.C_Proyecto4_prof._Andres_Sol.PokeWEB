@@ -8,25 +8,31 @@
 window.addEventListener("load", function(){
     const pokemonName = document.getElementById("pokemon-name");
     const searchError = document.getElementById("search-error");
-    const form1 = document.getElementById("form1");
+    const searchForms = [
+        document.getElementById("form1"),
+        document.getElementById("form-header")
+    ];
 
-    form1.addEventListener("submit", async function($e){
+    async function searchPokemon($e){
         $e.preventDefault();
         searchError.textContent = "";
         pokemonName.textContent = "";
 
         const formData = new FormData(this);
-        const pokemonNumber = formData.get("pokedex-number");
+        // La API acepta número o nombre en minúsculas
+        const query = String(formData.get("pokedex-number")).trim().toLowerCase();
 
         try {
-            const pokemonData = await pokeApi.getPokemonById(pokemonNumber);
+            const pokemonData = await pokeApi.getPokemonById(encodeURIComponent(query));
             pokemonName.textContent = pokemonData.name;
         } catch (error) {
             searchError.textContent = error instanceof Error
                 ? error.message
                 : "No se pudo buscar el Pokémon.";
         }
-    });
+    }
+
+    searchForms.forEach(form => form.addEventListener("submit", searchPokemon));
 
 });
 

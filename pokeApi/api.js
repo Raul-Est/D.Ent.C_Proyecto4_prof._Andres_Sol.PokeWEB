@@ -11,7 +11,7 @@ let getPokemonById = async (id) => {
 
     if (!response.ok) {
         if (response.status === 404) {
-            throw new Error("No se encontró un Pokémon con ese número.");
+            throw new Error("No se encontró un Pokémon con ese número o nombre.");
         }
 
         throw new Error(`PokéAPI respondió con el estado ${response.status}.`);

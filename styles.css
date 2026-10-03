@@ -70,6 +70,138 @@ body {
 }
 /*Fin: Estilos del logotipo */
 
+/*Inicio: Cabecera Pokédex */
+.pokedex-header {
+    background-color: var(--primaryColor);
+    padding: 1.5rem 2rem;
+
+    border-radius: 0 1rem 0 0;
+
+    border-top: 4px solid #8ca6ff;
+
+    max-width: 400px;
+}
+/*Fin: Cabecera Pokédex */
+
+
+/*Inicio: Buscador Pokédex */
+.pokedex-search {
+    min-width: 145px;
+}
+
+.pokedex-search .input-group-text,
+.pokedex-search .form-control {
+    background-color: var(--bodyBgcolor);
+    border: none;
+    color: var(--textColor);
+    border-radius: 0;
+}
+
+.pokedex-search .input-group-text {
+    padding-right: 0.35rem;
+    color: var(--secondaryColor);
+}
+
+.pokedex-search .form-control {
+    font-size: 0.7rem;
+    font-weight: bold;
+    letter-spacing: 0.02rem;
+    padding-left: 0.25rem;
+}
+
+.pokedex-search .form-control::placeholder {
+    color: white;
+    opacity: 1;
+}
+
+.pokedex-search .form-control:focus {
+    background-color: var(--bodyBgcolor);
+    color: white;
+
+    box-shadow: none;
+}
+/*Fin: Buscador Pokédex */
+
+
+/*Inicio: Caja Estado VOX */
+.vox-status {
+    background-color: #34352c;
+
+    height: 30px;
+
+    padding: 0 0.6rem;
+}
+
+.vox-text {
+    color: #6dc765;
+
+    font-size: 0.65rem;
+    font-weight: bold;
+
+    letter-spacing: 0.08rem;
+
+    white-space: nowrap;
+}
+/*Fin: Caja Estado VOX */
+
+
+/*Inicio: Barras VOX */
+.vox-bars {
+    height: 17px;
+}
+
+.vox-bars span {
+    display: block;
+
+    width: 4px;
+
+    background-color: var(--tertiaryColor);
+}
+
+.vox-bars span:nth-child(1) {
+    height: 10px;
+}
+
+.vox-bars span:nth-child(2) {
+    height: 14px;
+}
+
+.vox-bars span:nth-child(3) {
+    height: 12px;
+}
+
+.vox-bars span:nth-child(4) {
+    height: 7px;
+}
+/*Fin: Barras VOX */
+
+
+/*Inicio: Botón usuario */
+.user-button {
+    width: 35px;
+    height: 35px;
+
+    padding: 0;
+
+    margin-left: 5px;
+
+    border: none;
+    border-radius: 50%;
+
+    background-color: #ff9aa8;
+    color: #75101f;
+}
+
+.user-button:hover {
+    background-color: #ffb0bc;
+    color: #75101f;
+}
+
+.user-button i {
+    font-size: 1rem;
+}
+/*Fin: Botón usuario */
+
 
 /*Inicio: Estilos del buscador */
 .form-search-input-container .form-control {
