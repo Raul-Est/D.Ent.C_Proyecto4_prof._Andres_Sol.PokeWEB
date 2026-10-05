@@ -38,7 +38,7 @@
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                             <div class="collapse navbar-collapse" id="navbarNav">
-                                <ul class="navbar-nav main-menu">
+                                <ul class="navbar-nav main-menu alingn-items-center gap-3">
                                     <li class="nav-item">
                                         <a class="nav-link" aria-current="page" href="#">KANTO DEX</a>
                                     </li>
@@ -98,46 +98,260 @@
                     </nav>
                 </div>
                 <!-- Fin: Menú principal -->
-                <!-- Inicio: Columna derecha -->
-                <div class="col-12 col-md-2">
-
-                </div>
-                <!-- Fin: Columna derecha -->
             </div>
         </div>
     </header>
     <!-- Fin: de header tipo 1 -->
     <main>
-        <div class ="container-fluid">
-            <form id="form1" class="row p-3">
-                <div class="col-12">
-                    <div class="row">
-                        <div class="col-12 col-md-4">
-                            <div class="input-group form-search-input-container">
-                                <span class="input-group-text">
-                                    <i class="bi bi-search"></i>
-                                </span>
-                                <input
-                                    type="number"
-                                    class="form-control text-light"
-                                    id="pokemon-number"
-                                    name="pokedex-number"
-                                    placeholder="Número de Pokédex"
-                                    min="1"
-                                    required
-                                >
+        <!-- Inicio: Barra de herramientas -->
+        <section class="toolbar">
+            <div class="container-fluid">
+                <form id="form1" class="row align-items-center g-2 py-3">
+                    <div class="col-12 col-lg-5">
+                        <div class="input-group form-search-input-container">
+                            <span class="input-group-text"><i class="bi bi-search"></i></span>
+                            <input
+                                type="number"
+                                class="form-control text-light"
+                                id="pokemon-number"
+                                name="pokedex-number"
+                                placeholder="Número de Pokédex"
+                                aria-label="Buscar Pokémon"
+                                min="1"
+                                required
+                            >
+                            <button class="btn btn-outline-light reset-btn" id="reset-search" type="button">RESET</button>
+                        </div>
+                        <button class="btn btn-primary mt-2" type="submit">Buscar</button>
+                        <p id="search-error" class="search-error" role="alert"></p>
+                    </div>
+                    <div class="col-12 col-lg-5">
+                        <!-- Inicio: Filtros por tipo -->
+                        <div class="filters d-flex align-items-center gap-1 flex-wrap">
+                            <span class="filter-label">FILTRO:</span>
+                            <button type="button" class="filter-btn active" data-type="todos">TODOS</button>
+                            <button type="button" class="filter-btn" data-type="grass">PLANTA</button>
+                            <button type="button" class="filter-btn" data-type="fire">FUEGO</button>
+                            <button type="button" class="filter-btn" data-type="water">AGUA</button>
+                            <button type="button" class="filter-btn" data-type="electric">ELÉC</button>
+                            <button type="button" class="filter-btn" data-type="psychic">PSI</button>
+                        </div>
+                        <!-- Fin: Filtros por tipo -->
+                    </div>
+                    <div class="col-12 col-lg-2 text-lg-end">
+                        <!-- Inicio: Voz de Dexter -->
+                        <button type="button" class="voice-toggle" id="voice-toggle">
+                            <span class="voice-dot"></span>
+                            <span class="voice-label">VOZ DE DEXTER</span>
+                            <i class="bi bi-volume-up-fill"></i>
+                        </button>
+                        <!-- Fin: Voz de Dexter -->
+                    </div>
+                </form>
+            </div>
+        </section>
+        <!-- Fin: Barra de herramientas -->
+
+        <!-- *************************************************************************************************************** -->
+        <!-- Inicio: Cuerpo del dispositivo -->
+        <section class="device-body">
+            <div class="container-fluid">
+                <div class="row g-4 py-4">
+                    <!-- Inicio: Panel izquierdo PDA -->
+                    <div class="col-12 col-lg-5">
+                        <div class="device-panel h-100">
+                            <div class="panel-screws">
+                                <span class="screw"></span><span class="screw"></span>
                             </div>
-                            <button class="btn btn-primary mt-2" type="submit">Buscar</button>
-                            <p id="search-error" class="text-danger mt-2" role="alert"></p>
-                            <output id="pokemon-name" class="d-block mt-2 text-light" aria-live="polite"></output>
+                            <!-- Inicio: Pantalla PDA -->
+                            <div class="scan-screen">
+                                <div class="scan-header d-flex justify-content-between">
+                                    <span id="scan-id">#025 · PIKACHU</span>
+                                    <span>MODE: OPTIC-CAPTURE <i class="bi bi-webcam"></i></span>
+                                </div>
+                                <div class="scan-view text-center">
+                                    <img id="scan-sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="Pokémon" width="200" height="200">
+                                </div>
+                                <div class="scan-footer d-flex justify-content-between align-items-center">
+                                    <span><i class="bi bi-music-note-beamed"></i> CRY SYNTH:</span>
+                                    <span class="cry-bars"><i></i><i></i><i></i><i></i><i></i></span>
+                                </div>
+                            </div>
+                            <!-- Fin: Pantalla PDA -->
+                            <!-- Inicio: Navegación y controles -->
+                            <div class="panel-controls">
+                                <div class="d-flex gap-2 my-3">
+                                    <button class="btn nav-btn flex-fill" id="prev-pokemon" type="button">&larr; #024 ARBOK</button>
+                                    <button class="btn nav-btn flex-fill" id="next-pokemon" type="button">#026 RAICHU &rarr;</button>
+                                </div>
+                                <div class="controls-bottom d-flex justify-content-between align-items-end">
+                                    <button class="btn cry-btn" id="info-cry" type="button">INFO CRY</button>
+                                    <div class="d-pad" aria-hidden="true">
+                                        <span class="dpad-up"></span>
+                                        <span class="dpad-left"></span>
+                                        <span class="dpad-center"></span>
+                                        <span class="dpad-right"></span>
+                                        <span class="dpad-down"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Fin: Navegación y controles -->
                         </div>
                     </div>
+                    <!-- Fin: Panel izquiero PDA -->
+
+                    <!-- Inicio: Panel derecho de datos -->
+                    <div class="col-12 col-lg-7">
+                        <div class="device-panel h-100">
+                            <!-- Inicio: Ficha del Pokémon -->
+                            <div class="detail-card">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h2 class="detail-title" id="detail-title">#<span id="detail-id">025</span> <output id="pokemon-name" class="text-uppercase">pikachu</output></h2>
+                                    <div id="detail-types" class="d-flex gap-1"></div>
+                                </div>
+                                <div class="detail-grid">
+                                    <div><small>ESPECIE</small><strong id="detail-species">Pokémon Ratón</strong></div>
+                                    <div><small>ALTURA</small><strong id="detail-height">0.4 m</strong></div>
+                                    <div><small>PESO</small><strong id="detail-weight">6.0 kg</strong></div>
+                                </div>
+                                <div class="detail-desc-box my-2">
+                                    <small><i class="bi bi-journal-text"></i> REGISTRO OFICIAL KANTO:</small>
+                                    <p id="detail-desc"></p>
+                                </div>
+                                <div id="detail-stats" class="detail-stats"></div>
+                            </div>
+                            <!-- Fin: Ficha del Pokémon -->
+
+                            <!-- Inicio: Matriz de acceso directo numérico -->
+                            <div class="keypad-section">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h3 class="section-title">MATRIZ DE ACCESO DIRECTO NUMÉRICO</h3>
+                                    <div class="d-flex gap-1">
+                                        <button class="keypad-btn keypad-ce" data-key="C" type="button">C</button>
+                                        <button class="keypad-btn keypad-ce" data-key="E" type="button">E</button>
+                                    </div>
+                                </div>
+                                <div class="keypad-grid">
+                                    <button class="keypad-btn" data-key="1" type="button">1</button>
+                                    <button class="keypad-btn" data-key="2" type="button">2</button>
+                                    <button class="keypad-btn" data-key="3" type="button">3</button>
+                                    <button class="keypad-btn" data-key="4" type="button">4</button>
+                                    <button class="keypad-btn" data-key="5" type="button">5</button>
+                                    <button class="keypad-btn" data-key="6" type="button">6</button>
+                                    <button class="keypad-btn" data-key="7" type="button">7</button>
+                                    <button class="keypad-btn" data-key="8" type="button">8</button>
+                                    <button class="keypad-btn" data-key="9" type="button">9</button>
+                                    <button class="keypad-btn" data-key="0" type="button">0</button>
+                                </div>
+                            </div>
+                            <!-- Fin: Matriz de acceso directo numérico -->
+
+                            <!-- Inicio: Catálogo regional -->
+                            <div class="catalog-section">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h3 class="section-title">CATÁLOGO REGIONAL (#001 - #151)</h3>
+                                    <span class="catalog-count">151 ESPECÍMENES</span>
+                                </div>
+                                <div class="catalog-grid" id="catalog-grid"></div>
+                            </div>
+                            <!-- Fin: Catálogo regional -->
+                        </div>
+                    </div>
+                    <!-- Fin: Panel derecho de datos -->
                 </div>
-            </form>
-        </div>
+            </div>
+        </section>
+        <!-- Fin: Cuerpo del dispositivo -->
     </main>
     <footer>
+        <!-- scripts.js comprueba "ready" y aún no la define; temporal hasta completarlo -->
+        <script>window.ready = true;</script>
         <script type="module" src="./scripts.js"></script>
+        <!-- Inicio: Carga de datos de la API en el index (provisional hasta completar scripts.js) -->
+        <script type="module">
+            import * as pokeApi from "./pokeApi/api.js";
+
+            const TOTAL = 151;
+            const SPRITE = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
+            const $ = id => document.getElementById(id);
+            let currentId = 25;
+            let typeFilter = "todos";
+            const typeCache = {};
+
+            async function showPokemon(query) {
+                const data = await pokeApi.getPokemonById(encodeURIComponent(String(query).trim().toLowerCase()));
+                const species = await fetch(data.species.url).then(r => r.json()).catch(() => null);
+                const es = list => list?.find(x => x.language.name === "es");
+                currentId = data.id;
+
+                const name = data.name.toUpperCase();
+                $("pokemon-name").textContent = data.name;
+                $("detail-id").textContent = String(data.id).padStart(3, "0");
+                $("scan-id").textContent = `#${String(data.id).padStart(3, "0")} · ${name}`;
+                $("scan-sprite").src = data.sprites.other["official-artwork"].front_default ?? data.sprites.front_default;
+                $("detail-species").textContent = es(species?.genera)?.genus ?? "-";
+                $("detail-height").textContent = `${data.height / 10} m`;
+                $("detail-weight").textContent = `${data.weight / 10} kg`;
+                $("detail-desc").textContent = es(species?.flavor_text_entries)?.flavor_text.replace(/\f|\n/g, " ") ?? "";
+                $("detail-types").innerHTML = data.types
+                    .map(t => `<span class="badge text-bg-secondary">${t.type.name.toUpperCase()}</span>`).join("");
+                $("detail-stats").innerHTML = data.stats
+                    .map(s => `<div class="small">${s.stat.name.toUpperCase()}: <strong>${s.base_stat}</strong></div>`).join("");
+
+                $("prev-pokemon").textContent = currentId > 1 ? `← #${String(currentId - 1).padStart(3, "0")}` : "—";
+                $("next-pokemon").textContent = currentId < TOTAL ? `#${String(currentId + 1).padStart(3, "0")} →` : "—";
+            }
+
+            const safeShow = q => showPokemon(q).catch(e => { $("search-error").textContent = e.message; });
+
+            // Catálogo: sprites por id (sin 151 peticiones a la API)
+            $("catalog-grid").innerHTML = Array.from({ length: TOTAL }, (_, i) => i + 1)
+                .map(id => `<button type="button" class="catalog-item" data-id="${id}" aria-label="Pokémon ${id}">
+                    <img src="${SPRITE}${id}.png" alt="#${id}" loading="lazy" width="48" height="48"></button>`).join("");
+            $("catalog-grid").addEventListener("click", e => {
+                const btn = e.target.closest(".catalog-item");
+                if (btn) safeShow(btn.dataset.id);
+            });
+
+            // Filtros por tipo
+            document.querySelectorAll(".filter-btn").forEach(btn => btn.addEventListener("click", async () => {
+                document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                typeFilter = btn.dataset.type;
+                let ids = null;
+                if (typeFilter !== "todos") {
+                    typeCache[typeFilter] ??= (await pokeApi.getPokemonType(typeFilter)).pokemon
+                        .map(p => Number(p.pokemon.url.split("/").filter(Boolean).pop()));
+                    ids = typeCache[typeFilter];
+                }
+                document.querySelectorAll(".catalog-item").forEach(item => {
+                    item.hidden = ids !== null && !ids.includes(Number(item.dataset.id));
+                });
+            }));
+
+            // Formulario (scripts.js ya gestiona el error y el nombre; aquí se completa la ficha)
+            $("form1").addEventListener("submit", e => {
+                e.preventDefault();
+                const q = $("pokemon-number").value;
+                if (q) safeShow(q);
+            });
+
+            // Teclado numérico: C borra, E busca
+            const input = $("pokemon-number");
+            document.querySelectorAll(".keypad-btn").forEach(btn => btn.addEventListener("click", () => {
+                const key = btn.dataset.key;
+                if (key === "C") input.value = "";
+                else if (key === "E") { if (input.value) safeShow(input.value); }
+                else input.value += key;
+            }));
+
+            $("prev-pokemon").addEventListener("click", () => currentId > 1 && safeShow(currentId - 1));
+            $("next-pokemon").addEventListener("click", () => currentId < TOTAL && safeShow(currentId + 1));
+
+            safeShow(currentId);
+        </script>
+        <!-- Fin: Carga de datos de la API en el index -->
+    
     </footer>
 </body>
 </html>
