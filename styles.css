@@ -68,18 +68,18 @@ body {
     font-weight: bold;
     margin-left: 5px;
 }
+
+.pokedex-logo {
+    width: 120px;
+}
 /*Fin: Estilos del logotipo */
 
 /*Inicio: Cabecera Pokédex */
 .pokedex-header {
     background-color: var(--primaryColor);
     padding: 1.5rem 2rem;
-
     border-radius: 0 1rem 0 0;
-
     border-top: 4px solid #8ca6ff;
-
-    max-width: 400px;
 }
 /*Fin: Cabecera Pokédex */
 
