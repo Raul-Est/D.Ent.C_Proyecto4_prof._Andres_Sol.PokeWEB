@@ -245,7 +245,7 @@
                                 </div>
                             </div>
                             <!-- Fin: Matriz de acceso directo numérico -->
-
+<!-- [TO-DO]: CAMBIAR CATALOGO REGIONAL A FULL API -->
                             <!-- Inicio: Catálogo regional -->
                             <div class="catalog-section">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
@@ -271,7 +271,21 @@
         <script type="module">
             import * as pokeApi from "./pokeApi/api.js";
 
-            const TOTAL = 151;
+            //INICIO [TO-DO]: IMPLEMENTAR CARGAR TODOS LOS POKEMON
+            async function showAllPokemons(){
+                const pokemons = await getAllPokemons();
+                console.log(pokemons);
+            }
+            lista.innerHTML = "";
+            pokemons.forEach(pokemon =>{
+                const elemento = document.createElement("li");
+                elemnto.textContent = pokemon.name;
+                lista.appendClild(elemnto);
+            });
+            //FIN [TO-DO]: FIN CARGA TODOS LOS POKEMON
+
+
+
             const SPRITE = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
             const $ = id => document.getElementById(id);
             let currentId = 25;

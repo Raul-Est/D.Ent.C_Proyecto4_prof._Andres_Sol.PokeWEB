@@ -1,5 +1,6 @@
 //Inicio: Import
     import * as pokeApi from "./pokeApi/api.js"
+    // import { getPokemonById } from "./pokeApi/api.js"
     import * as bootstrap from "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
 //Fin: Import 
 
